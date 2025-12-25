@@ -35,7 +35,7 @@ const BELIEFS = [
         <span className="text-zinc-300">I want AI to scale judgment and output,</span> not erase the human.
       </>,
       <>
-        <span className="text-zinc-300">Symbiosis over substitution:</span> humans set direction, machines handle the grind (Man–Computer Symbiosis).
+        <span className="text-zinc-300">Symbiosis over substitution:</span> humans set direction, machines handle the grind.
       </>,
       <>
         <span className="text-zinc-300">The human stays the architect;</span> AI is leverage, not leadership.
@@ -83,7 +83,7 @@ export default function Home() {
       <header>
         <h1 className="text-3xl font-semibold tracking-tight mb-2">Sanju Lokuhitige</h1>
         <h2 className="text-lg font-normal text-zinc-500">
-          I build. I write code. Cofounder & CTO at{" "}
+          I build (products, experiences & businesses). Cofounder & CTO at{" "}
           <ExternalLink href="https://mythril.io">Mythril.io</ExternalLink>
         </h2>
       </header>
@@ -92,11 +92,11 @@ export default function Home() {
         <div className="flex flex-col gap-3">
           <h3 className="text-sm font-medium text-zinc-300">About me</h3>
           <ul className="flex flex-col gap-2 list-disc list-inside text-zinc-400 text-sm marker:text-zinc-600">
-            <li>Roots in Sri Lanka. Educated in KR & US (CS, AI, Technology & Society).</li>
+            <li>Roots in Sri Lanka. Educated in KR & US (CS, IoT, AI, Technology & Society).</li>
             <li>Engineering background in embedded systems, AI & SaaS startups in Seoul & SF.</li>
-            <li>Scaled technical solutions, FDE at ProtoPie & Arena.im.</li>
+            <li>Scaled technical solutions & FDE teams at <ExternalLink href="https://protopie.io">ProtoPie</ExternalLink> & <ExternalLink href="https://arena.im">Arena</ExternalLink>.</li>
             <li>
-              Currently lead AI strategy and engineering at{" "}
+              Currently lead AI strategy & engineering at{" "}
               <ExternalLink href="https://mythril.io">Mythril</ExternalLink>. Building the future of creative publishing.
             </li>
             <li>
