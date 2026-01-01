@@ -107,6 +107,19 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col gap-3">
+          <p className="text-zinc-400 text-sm">
+            I am starting to share my thoughts in blog format. You can check them out{" "}
+            <a
+              href="/blog"
+              className="text-zinc-500 hover:text-white transition-colors duration-200 border-b border-transparent hover:border-white"
+            >
+              here
+            </a>
+            .
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-3">
           <h3 className="text-sm font-medium text-zinc-300">What I Believe</h3>
           <ul className="flex flex-col gap-4 text-zinc-400 text-sm">
             {BELIEFS.map((belief, index) => (
@@ -124,6 +137,12 @@ export default function Home() {
       </section>
 
       <section className="flex gap-6 mt-4 text-sm">
+        <a
+          href="/blog"
+          className="text-zinc-500 hover:text-white transition-colors duration-200 border-b border-transparent hover:border-white"
+        >
+          Blog
+        </a>
         {SOCIALS.map((link) => (
           <ExternalLink key={link.name} href={link.href}>
             {link.name}
