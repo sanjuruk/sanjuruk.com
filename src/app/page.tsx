@@ -1,59 +1,36 @@
+export const dynamic = "force-static";
 
 const BELIEFS = [
   {
     title: "Software should feel magical.",
     points: [
-      <>
-        <span className="text-zinc-300">Great design is subtraction:</span> remove steps until only intent remains.
-      </>,
-      <>
-        <span className="text-zinc-300">Complexity doesn’t disappear. It moves;</span> I’d rather carry it than make users carry it (Tesler’s Law).
-      </>,
-      <>
-        <span className="text-zinc-300">The best interface is less interface:</span> anticipate what people want before they ask.
-      </>,
+      ["Great design is subtraction:", "remove steps until only intent remains."],
+      ["Complexity doesn't disappear. It moves;", "I'd rather carry it than make users carry it (Tesler's Law)."],
+      ["The best interface is less interface:", "anticipate what people want before they ask."],
     ],
   },
   {
     title: "Speed is a feature.",
     points: [
-      <>
-        <span className="text-zinc-300">Velocity compounds:</span> shorter loops beat smarter plans (OODA loop mindset).
-      </>,
-      <>
-        <span className="text-zinc-300">Most decisions are reversible “two-way doors,”</span> so I bias toward action and iterate.
-      </>,
-      <>
-        <span className="text-zinc-300">Shipping often can improve stability.</span> Elite teams balance speed and reliability with DORA metrics.
-      </>,
+      ["Velocity compounds:", "shorter loops beat smarter plans (OODA loop mindset)."],
+      ["Most decisions are reversible \"two-way doors,\"", "so I bias toward action and iterate."],
+      ["Shipping often can improve stability.", "Elite teams balance speed and reliability with DORA metrics."],
     ],
   },
   {
-    title: "Amplify, don’t replace.",
+    title: "Amplify, don't replace.",
     points: [
-      <>
-        <span className="text-zinc-300">I want AI to scale judgment and output,</span> not erase the human.
-      </>,
-      <>
-        <span className="text-zinc-300">Symbiosis over substitution:</span> humans set direction, machines handle the grind.
-      </>,
-      <>
-        <span className="text-zinc-300">The human stays the architect;</span> AI is leverage, not leadership.
-      </>,
+      ["I want AI to scale judgment and output,", "not erase the human."],
+      ["Symbiosis over substitution:", "humans set direction, machines handle the grind."],
+      ["The human stays the architect;", "AI is leverage, not leadership."],
     ],
   },
   {
     title: "Code is a liability.",
     points: [
-      <>
-        <span className="text-zinc-300">Every line of code is a long-term maintenance bill,</span> not an asset.
-      </>,
-      <>
-        <span className="text-zinc-300">My favorite feature is the one I didn’t have to build</span> (“best code is no code” in practice).
-      </>,
-      <>
-        <span className="text-zinc-300">Deleting code is progress.</span> Sometimes the most productive day is “-2000 lines.”
-      </>,
+      ["Every line of code is a long-term maintenance bill,", "not an asset."],
+      ["My favorite feature is the one I didn't have to build", "(\"best code is no code\" in practice)."],
+      ["Deleting code is progress.", "Sometimes the most productive day is \"-2000 lines.\""],
     ],
   },
 ];
@@ -127,7 +104,9 @@ export default function Home() {
                 <span className="text-zinc-300 font-medium">{belief.title}</span>
                 <ul className="flex flex-col gap-1 pl-4 list-disc list-inside marker:text-zinc-600">
                   {belief.points.map((point, i) => (
-                    <li key={i}>{point}</li>
+                    <li key={i}>
+                      <span className="text-zinc-300">{point[0]}</span> {point[1]}
+                    </li>
                   ))}
                 </ul>
               </li>
