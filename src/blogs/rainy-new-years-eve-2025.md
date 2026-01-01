@@ -2,7 +2,7 @@
 
 Date: 12/31/2025
 
-It’s raining hard. The kind of rain that turns San Francisco quiet, like someone hit mute on the city.
+It’s raining hard in San Francisco.
 
 Most New Year’s plans got cancelled. Not dramatically. Just… rain.
 
