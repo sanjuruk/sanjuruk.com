@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Sanju Lokuhitige",
-  description: "Personal portfolio of Sanjuruk, CTO based in San Francisco.",
+  description: "Personal portfolio of Sanju Lokuhitige, Founder & CTO based in San Francisco.",
 };
 
 export default function RootLayout({
