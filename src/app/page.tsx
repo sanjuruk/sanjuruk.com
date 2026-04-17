@@ -36,7 +36,6 @@ const BELIEFS = [
 ];
 
 const SOCIALS = [
-  { name: "X", href: "https://x.com/sanjuruk" },
   { name: "Github", href: "https://github.com/sanjuruk" },
   { name: "LinkedIn", href: "https://www.linkedin.com/in/sanjuruk/" },
 ];
