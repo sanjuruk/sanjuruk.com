@@ -77,7 +77,8 @@ export default function Home() {
             </li>
             <li>
               I speak <span className="font-medium">English</span>, <span className="font-medium">Sinhala</span> &{" "}
-              <span className="font-medium">Korean</span>. I play basketball, gym x3/week, write songs occasionally.
+              <span className="font-medium">Korean</span>. I play basketball,{" "}
+              <ExternalLink href="https://hevy.com/user/sanjuruk">gym x3/week</ExternalLink>, write songs occasionally.
             </li>
           </ul>
         </div>
