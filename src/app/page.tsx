@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const dynamic = "force-static";
 
 const BELIEFS = [
@@ -59,7 +61,7 @@ export default function Home() {
       <header>
         <h1 className="text-3xl font-semibold tracking-tight mb-2">Sanju Lokuhitige</h1>
         <h2 className="text-lg font-normal text-zinc-500">
-          I build (products, experiences & businesses). Cofounder & CTO at{" "}
+          I help creatives turn stories into franchises. Cofounder & CTO at{" "}
           <ExternalLink href="https://mythril.io">Mythril.io</ExternalLink>
         </h2>
       </header>
@@ -86,12 +88,12 @@ export default function Home() {
         <div className="flex flex-col gap-3">
           <p className="text-zinc-400 text-sm">
             I am starting to share my thoughts in blog format. You can check them out{" "}
-            <a
+            <Link
               href="/blog"
               className="text-zinc-500 hover:text-white transition-colors duration-200 border-b border-transparent hover:border-white"
             >
               here
-            </a>
+            </Link>
             .
           </p>
         </div>
@@ -116,12 +118,12 @@ export default function Home() {
       </section>
 
       <section className="flex gap-6 mt-4 text-sm">
-        <a
+        <Link
           href="/blog"
           className="text-zinc-500 hover:text-white transition-colors duration-200 border-b border-transparent hover:border-white"
         >
           Blog
-        </a>
+        </Link>
         {SOCIALS.map((link) => (
           <ExternalLink key={link.name} href={link.href}>
             {link.name}
