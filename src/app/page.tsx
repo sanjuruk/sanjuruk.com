@@ -123,7 +123,7 @@ export default function Home() {
         <div className="flex flex-col gap-3">
           <h3 className="text-sm font-medium text-zinc-300">About me</h3>
           <ul className="flex flex-col gap-2 list-disc list-inside text-zinc-400 text-sm marker:text-zinc-600">
-            <li>Roots in Sri Lanka. Educated in KR & US (CS, IoT, AI, Technology & Society).</li>
+            <li>Roots in Sri Lanka. 9 years in Korea. Now in SF.</li>
             <li>Engineering background in embedded systems, AI & SaaS startups in Seoul & SF.</li>
             <li>
               Scaled technical solutions & FDE teams at{" "}
