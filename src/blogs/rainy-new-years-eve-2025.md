@@ -1,3 +1,7 @@
+---
+date: "2025-12-31"
+description: "New Year's Eve in San Francisco — rain, founder life, moving countries, and a Cursor agent pushing a PR at midnight."
+---
 # Rainy New Year’s Eve 2025
 
 It’s raining hard in San Francisco.

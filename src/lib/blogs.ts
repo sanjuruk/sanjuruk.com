@@ -10,9 +10,12 @@ export interface BlogPost {
   slug: string;
   title: string;
   date: string;
+  description: string;
   content: string;
   htmlContent: string;
 }
+
+export type BlogMetadata = Omit<BlogPost, "content" | "htmlContent">;
 
 function titleFromMarkdown(markdown: string): string | null {
   // Prefer the first H1 line: "# Title"
@@ -20,6 +23,14 @@ function titleFromMarkdown(markdown: string): string | null {
   if (!match) return null;
   const title = match[1]?.trim();
   return title ? title : null;
+}
+
+function descriptionFromMarkdown(markdown: string): string {
+  return markdown
+    .replace(/^#\s+.+\n*/, "")
+    .replace(/\s+/g, " ")
+    .slice(0, 160)
+    .trim();
 }
 
 export function getBlogSlugs(): string[] {
@@ -33,9 +44,9 @@ export function getBlogSlugs(): string[] {
     .map((fileName) => fileName.replace(/\.md$/, ""));
 }
 
-export async function getBlogBySlug(slug: string): Promise<BlogPost | null> {
+export function getBlogMetadataBySlug(slug: string): BlogMetadata | null {
   const fullPath = path.join(blogsDirectory, `${slug}.md`);
-  
+
   if (!fs.existsSync(fullPath)) {
     return null;
   }
@@ -43,24 +54,57 @@ export async function getBlogBySlug(slug: string): Promise<BlogPost | null> {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  const processedContent = await remark().use(remarkHtml).process(content);
-  const htmlContent = processedContent.toString();
-
   const inferredTitle = titleFromMarkdown(content);
   const title = (typeof data.title === "string" && data.title.trim()) ? data.title.trim() : (inferredTitle ?? slug);
   const date = (typeof data.date === "string" && data.date.trim()) ? data.date.trim() : "";
+  const description = (typeof data.description === "string" && data.description.trim())
+    ? data.description.trim()
+    : descriptionFromMarkdown(content);
 
   return {
     slug,
     title,
     date,
+    description,
+  };
+}
+
+export function getAllBlogMetadata(): BlogMetadata[] {
+  return getBlogSlugs()
+    .map((slug) => getBlogMetadataBySlug(slug))
+    .filter((blog): blog is BlogMetadata => Boolean(blog))
+    .sort((a, b) => {
+      if (!a.date && !b.date) return 0;
+      if (!a.date) return 1;
+      if (!b.date) return -1;
+      return a.date < b.date ? 1 : -1;
+    });
+}
+
+export async function getBlogBySlug(slug: string): Promise<BlogPost | null> {
+  const fullPath = path.join(blogsDirectory, `${slug}.md`);
+
+  if (!fs.existsSync(fullPath)) {
+    return null;
+  }
+
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const { content } = matter(fileContents);
+
+  const processedContent = await remark().use(remarkHtml).process(content);
+  const htmlContent = processedContent.toString();
+  const metadata = getBlogMetadataBySlug(slug);
+  if (!metadata) return null;
+
+  return {
+    ...metadata,
     content,
     htmlContent,
   };
 }
 
 export async function getAllBlogs(): Promise<BlogPost[]> {
-  const slugs = getBlogSlugs();
+  const slugs = getAllBlogMetadata().map((blog) => blog.slug);
   const blogs = await Promise.all(
     slugs.map(async (slug) => {
       const blog = await getBlogBySlug(slug);
@@ -76,4 +120,3 @@ export async function getAllBlogs(): Promise<BlogPost[]> {
     return a.date < b.date ? 1 : -1;
   });
 }
-

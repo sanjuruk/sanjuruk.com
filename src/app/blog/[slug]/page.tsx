@@ -1,12 +1,40 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getBlogBySlug, getBlogSlugs } from "@/lib/blogs";
+import { absoluteUrl, PERSON_ID, SITE_NAME, WEBSITE_ID } from "@/lib/site";
 
 export async function generateStaticParams() {
   const slugs = getBlogSlugs();
-  return slugs.map((slug) => ({
-    slug,
-  }));
+  return slugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const blog = await getBlogBySlug(slug);
+  if (!blog) return {};
+
+  return {
+    title: blog.title,
+    description: blog.description,
+    openGraph: {
+      title: blog.title,
+      description: blog.description,
+      type: "article",
+      publishedTime: blog.date || undefined,
+      url: absoluteUrl(`/blog/${slug}`),
+    },
+    twitter: {
+      card: "summary",
+      title: blog.title,
+      description: blog.description,
+    },
+    alternates: { canonical: absoluteUrl(`/blog/${slug}`) },
+  };
 }
 
 export default async function BlogPostPage({
@@ -23,8 +51,23 @@ export default async function BlogPostPage({
 
   const markdownHasH1 = /^#\s+.+$/m.test(blog.content);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${absoluteUrl(`/blog/${slug}`)}#post`,
+    headline: blog.title,
+    description: blog.description,
+    ...(blog.date && { datePublished: blog.date }),
+    ...(blog.date && { dateModified: blog.date }),
+    url: absoluteUrl(`/blog/${slug}`),
+    mainEntityOfPage: absoluteUrl(`/blog/${slug}`),
+    isPartOf: { "@id": WEBSITE_ID },
+    author: { "@id": PERSON_ID, "@type": "Person", name: SITE_NAME, url: absoluteUrl() },
+  };
+
   return (
     <main className="animate-[fadeIn_0.8s_ease-out_forwards] w-full max-w-[700px] flex flex-col gap-6 mt-20 mb-20 mx-auto px-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <header className="flex flex-col gap-2">
         <Link
           href="/blog"
@@ -53,4 +96,3 @@ export default async function BlogPostPage({
     </main>
   );
 }
-
